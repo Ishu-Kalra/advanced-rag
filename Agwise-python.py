@@ -131,7 +131,7 @@ embeddings = OpenAIEmbeddings(api_key=api_key)
 llm = ChatOpenAI(api_key=api_key, model='gpt-4')
 
 # Initialize data for each year, including vectors and retrievers
-data = initialize_year_data(years)
+data = initialize_year_data(years, recreate_indexes=False)
 year_docs = data['year_docs']
 year_vectorstores = data['year_vectorstores']
 year_retrievers = data['year_retrievers']
@@ -141,7 +141,7 @@ year_qa_tools = data['year_qa_tools']
 routing_vectorstore = load_or_create_faiss_index_for_routing(
     years=list(years.keys()),
     embeddings=embeddings,
-    create_anyway=True
+    create_anyway=False
 )
 
 # Function to find the most similar year to a given query using the routing vectorstore
